@@ -1,0 +1,38 @@
+.container-category { 
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f5ebf8;
+    transition: 200ms ease;
+    cursor: pointer;
+    text-decoration: none;
+    img { 
+        width: 146px;
+        height: 91px;
+    }
+  
+    .text-cont { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h5 { 
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;  
+            margin-bottom: 8px;
+            color: #000;
+            text-decoration: none;
+        }
+        p { 
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            margin-bottom: 0;
+            color: #000;
+            text-decoration: none;
+        }
+    }
+
+    &:hover { 
+        background: #f5ebf8;
+    } 
+}

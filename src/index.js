@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './assets/style.scss';
+import 'bootstrap/dist/js/bootstrap.esm'
+
+import AppProvider from './context/AppProvider'
+import ContForContext from './ContForContext'
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
+  <React.StrictMode> 
+      <AppProvider>
+        <ContForContext /> 
+      </AppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
