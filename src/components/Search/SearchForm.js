@@ -10,18 +10,17 @@ function SearchForm(props) {
     let [isRedirect, setIsRedirect] = useState(false)
     let [isDisabled, setIsDisabled] = useState(true)
 
-    let value = props.isContained ? props.context.searchString : searchValue
+    // let value
+    let value 
   
     
-    useEffect( () => { 
-        // if(props.value && isFirstChange)  {    
-        //     setSearchValue(props.value) 
-        // }
-        // console.log(props.context.searchString)
-    })
+    useEffect( () => {  
+        value = searchValue 
+    }, [])
 
     function onFormSumbit(e) { 
         e.preventDefault() 
+        props.context.setSearchString(searchValue)
         searchQuery()
         setIsRedirect(true)  
     }
@@ -43,8 +42,7 @@ function SearchForm(props) {
     }
     
     function onChangeInput(e) {   
-        setSearchValue(e.target.value)
-        props.context.setSearchString(e.target.value)
+        setSearchValue(e.target.value) 
 
         if(e.target.value.length > 2) setIsDisabled(false)
         else setIsDisabled(true)

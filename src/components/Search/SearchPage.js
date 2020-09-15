@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SearchForm from './SearchForm'
 import RenderAsList from '../../views/renderAsList'
 import AppContext from '../../context/AppContext' 
@@ -6,11 +6,6 @@ import AppContext from '../../context/AppContext'
 
 function SearchPage(props) { 
     let title = props.context.searchString ? `Search result for "${props.context.searchString}" ` : 'Search'
- 
- 
-    useEffect(() => { 
-        // console.log(props.context.searchString)
-    });
  
     function renderSearchAnswer() { 
         return( 
