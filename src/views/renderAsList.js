@@ -8,8 +8,8 @@ function renderAsList(props) {
             className={`${props.className} row`}   
         > 
             {   props.thumb && 
-                <div className='col-auto'>
-                    <img src={props.thumb} alt={ props.name } ></img>
+                <div className='col col-sm-auto'> 
+                        <div className='img' style={{backgroundImage: `url(${props.thumb})`}}></div>
                 </div>
             }
             <div className='col text-cont'>

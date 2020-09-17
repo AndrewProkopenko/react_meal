@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react' 
 import RenderAsList from '../../views/renderAsList'
-import { FILTER_BY_AREA } from '../../actions'
+import { FILTER_BY_AREA } from '../../actions/actions'
 
 function SingleCategory(props) {
     const [data, setData] = useState([]);
  
     useEffect(() => {
-        if(data.length === 0 ) fetchCategory() 
-    });
+        fetchAreas()  
+    }, []);
 
     
-    function fetchCategory() {  
+    function fetchAreas() {  
         FILTER_BY_AREA(props.match.params.area)
         .then( response => {   
             setData(response.meals)
@@ -21,7 +21,7 @@ function SingleCategory(props) {
         return (  
                 data.length>0 &&
                 data.map( (meal) => (
-                    <div className='col' key={meal.idMeal}>
+                    <div className='col-6 col-md-4 col-lg-3' key={meal.idMeal}>
                         <RenderAsList  
                             id={meal.idMeal}
                             name={meal.strMeal}  

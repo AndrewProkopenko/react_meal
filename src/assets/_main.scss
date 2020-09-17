@@ -1,17 +1,22 @@
 
 $primary: #601C71;
-$seccndary: #AA91BD;
+$seccondary: #AA91BD;
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap'); 
+
+
+$bg-color: #f4f4f4; 
+$bg-color-container: #ffffff; 
+$border-color: darken($bg-color, 15);
 
 html, body { 
     margin: 0;
     padding: 0;
     font-size: 14px;
-    background: #f4f4f4;
+    background: $bg-color;
     color: #000;
-    font-family: "Ubuntu";
+    font-family: "Ubuntu" !important;
 } 
 
 a:focus { 
@@ -20,11 +25,11 @@ a:focus {
 .nav-item { 
     a.active { 
         color: #FFD600 !important;
-    }
+    } 
 }
 
 .container-styled { 
-    background: #FFFFFF;
+    background: $bg-color-container;
     box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.11);
     border-radius: 4px;
 
@@ -50,21 +55,102 @@ a:focus {
         max-width: 70%;
         margin-left: auto;
         margin-right: auto;
+        input { 
+            background: $bg-color;
+            &:focus {  
+                border-color: #AA91BD;
+            }
+        }
         button, input { 
             padding-left: 25px;
             padding-right: 25px;
         }
     }
 } 
+
+.btn-more { 
+    &:focus { 
+        box-shadow: none;
+    }
+}
+.btn-favorite { 
+    max-height: 40px; 
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background: #cab7d8;
+    transition: 300ms all;
+    svg { 
+        width: 24px;
+        height: 22px;
+        fill: #fff; 
+        transition: 300ms all;
+    }
+    &:hover { 
+        background: none;
+        svg {  
+            fill: rgb(209, 71, 66);
+        }
+    }
+    &:active { 
+        box-shadow: none;
+        background: rgb(209, 71, 66);
+        svg {  
+            fill: rgb(255, 255, 255);
+        }
+    }
+}
+.btn-favorite.favorite { 
+    background: rgb(209, 71, 66);
+    &:hover { 
+        background:  rgb(221, 102, 98);
+        svg {  
+            fill: rgb(255, 255, 255);
+        }
+    }
+}
+
+.navbar-collapse { 
+    transition: 0ms;
+}
+
+.navbar-collapse.show { 
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background: rgba(96, 28, 113, 0.95);
+    height: 100vh;
+    z-index: 99;
+    .nav-item { 
+        text-align: center;
+        margin-top: 15px;
+    }
+    .search-form { 
+        padding-left: 10px;
+        padding-right: 10px;
+        .btn { 
+            flex-grow: 1;
+        }
+    }
+}
 .search-form { 
     display: flex;
     input { 
         flex-grow: 1; 
-        background: #FFFFFF;
-        border: 1px solid #AF96C4; 
+        background: $bg-color-container; 
+        border: 1px solid $bg-color-container;
+        // border: 0; 
         border-radius: 4px 0px 0px 4px; 
         padding: 5px 15px;
         height: 40px;
+        transition: 300ms all;
+        &:focus { 
+            outline: 0; 
+            background: $bg-color; 
+        }
     }
     button { 
         background: #AA91BD;

@@ -1,51 +1,42 @@
-import React, { Component } from 'react' 
-import { GET_CATEGORIES } from '../../actions'
+import React  from 'react' 
+import { GET_CATEGORIES } from '../../actions/actions'
 
 import RenderAsList from '../../views/renderAsList'
+ 
 
-export default class Categories extends Component {
-    constructor(props) { 
-        super(props)
-        this.state = {
-            categories: []
-        } 
-    }
+function Categories(props) {
 
-    componentDidMount() {   
-        this.cachingCategoryData()
-    }
+    const [categories, setCategories] = React.useState([])
 
-    cachingCategoryData() { 
-        if(this.props.context.isCategoryFetched) { 
-            this.setState( { 
-                categories: this.props.context.categories
-            })
+    React.useEffect( () => {
+        cachingCategoryData() 
+    }, [])
+
+    function cachingCategoryData() { 
+        if(props.context.categories.length > 0) { 
+            setCategories(props.context.categories)
             console.log('cash')
         } 
         else {  
-             this.fetchCategories()
+             fetchCategories()
              console.log('fetch')
         }
     }
 
-    fetchCategories() { 
+    function fetchCategories() { 
         GET_CATEGORIES()
         .then( response => { 
-            this.setState({ 
-                categories: response.categories
-            })
-            
-            this.props.context.setCategories(response.categories) 
+            setCategories(response.categories) 
+            props.context.setCategories(response.categories) 
         }) 
          
     }
 
-   
-    renderCategories() { 
+    function renderCategories() { 
         return( 
             <div> 
-                {   this.state.categories.length>0 &&
-                    this.state.categories.map( (category) => (
+                {   categories.length>0 &&
+                    categories.map( (category) => (
                         <div className='col' key={category.idCategory}>
                             <RenderAsList  
                                     id={category.idCategory}
@@ -61,19 +52,18 @@ export default class Categories extends Component {
             </div> 
                
         )
-    }
-    
-
-    render() {
-        return (
-            <div className='container container-styled '> 
-                <h3>Categories</h3>
-                <div className='row'>
-                    { 
-                        this.renderCategories()
-                    }
-                </div>
+    } 
+    return ( 
+        <div className='container container-styled '> 
+            <h3>Categories</h3>
+            <div className='row'>
+                { 
+                    renderCategories()
+                }
             </div>
-        )
-    }
+        </div> 
+    )
 }
+
+export default Categories
+

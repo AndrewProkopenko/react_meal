@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react' 
 import RenderAsList from '../../views/renderAsList'
-import { FILTER_BY_CATEGORY } from '../../actions'
+import { FILTER_BY_CATEGORY } from '../../actions/actions'
 
 function SingleCategory(props) {
     const [data, setData] = useState([]);

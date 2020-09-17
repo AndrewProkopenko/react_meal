@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { SEARCH_MEALS } from '../../actions' 
+import { SEARCH_MEALS } from '../../actions/actions' 
  
 
 function SearchForm(props) {

@@ -1,7 +1,8 @@
 import React , { useEffect , useState} from 'react'
-import { NavLink } from 'react-router-dom'
 
-import { GET_AREA_LIST } from '../../actions'
+import { GET_AREA_LIST } from '../../actions/actions'
+
+import RenderNumberedList from '../../views/RenderNumberedList'
 
 function Areas() {
     const [data, setData] = useState([]);
@@ -12,32 +13,18 @@ function Areas() {
 
     function fetchAreas() { 
         GET_AREA_LIST()
-        .then( response => {  
-            // console.log(response)
+        .then( response => {   
             setData(response.meals)
         }) 
     }
-
-    function renderAreas() { 
-        return (
-            data.map( (item, index) => (
-                <li key={index}>
-                    <NavLink to={`/area/${item.strArea}`}>
-                        { item.strArea}
-                    </NavLink>
-                </li>
-            )) 
-        )
-    }
+ 
 
     return (
         <div className='container container-styled container-areas '> 
         <h3>Areas</h3>
         <div className='row'>
-            <div className='col-12'>
-                <ol>
-                    { renderAreas() }
-                </ol>
+            <div className='col-12'> 
+                <RenderNumberedList data={data} value='strArea' /> 
             </div>
         </div>
     </div>
