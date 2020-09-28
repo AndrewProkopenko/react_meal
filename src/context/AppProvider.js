@@ -67,40 +67,11 @@ class AppProvider extends Component {
                         this.setState({  
                             listAreas: list
                         })  
-                    },
-
-                    // setFavorites: (newList) => { 
-                    //     this.setState({  
-                    //         favorites: newList
-                    //     })  
-                    // },
-
-                    // hendlerFavorites: (meal, isFavorite) => { 
-                    //     // console.log(isFavorite)
-                    //     // const id = meal
-                    //     let newFavoritesArray =  this.state.favorites.slice() 
-                        
-                    //     if (isFavorite) {  
-                    //         const filtered = newFavoritesArray.filter( item => {
-                    //             return  item.id == meal.idMeal
-                    //         }) 
-                    //         this.setState({
-                    //             favorites: filtered
-                    //         })
-                    //         console.log(filtered)
-                    //     }
-                    //     else {  
-                    //         newFavoritesArray.push(meal)
-                    //         this.setState({
-                    //             favorites: newFavoritesArray
-                    //         })
-                    //     }
-    
-                    // },
+                    }, 
                     
                     hendlerFavorites: (meal, id) => { 
                         let isFav = false
-                        const newFavoritesArray =  this.state.favorites.slice()
+                        let newFavoritesArray =  this.state.favorites.slice()
                         
                         if( this.state.favorites.length > 0) { 
                             this.state.favorites.forEach( (item) => { 
@@ -109,13 +80,12 @@ class AppProvider extends Component {
                                     isFav = true  
                                 } 
                             }) 
-                            if(isFav) {
-                                console.log('udalenie')
-                                const filtered = newFavoritesArray.filter( item => {
+                            if(isFav) {  
+                                newFavoritesArray = newFavoritesArray.filter( item => {
                                     return  item.idMeal !== id
-                                })   
+                                })    
                                 this.setState({
-                                    favorites: filtered
+                                    favorites: newFavoritesArray
                                 })
                             } else {
                                 newFavoritesArray.push(meal)
@@ -131,10 +101,21 @@ class AppProvider extends Component {
                             })
                         }
 
-                        // setTimeout(() => {
-                        //     console.log(this.state.favorites)
-                        // }, 300);
-                    } 
+                        let favoritesForStorage = newFavoritesArray.slice()
+                        favoritesForStorage =  JSON.stringify(favoritesForStorage)
+                       
+                        localStorage.setItem('react_meal_favorites', favoritesForStorage)
+
+                      
+                    },
+
+                    setFavoritesFromStorage: () => {
+                        let favorites = localStorage.getItem('react_meal_favorites')
+                        favorites = JSON.parse(favorites)
+                        this.setState({
+                            favorites: favorites
+                        })
+                    }
                     
 
             } }>

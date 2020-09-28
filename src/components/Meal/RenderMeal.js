@@ -14,17 +14,16 @@ function RenderMeal(props) {
     useEffect( () => {
         isFavoriteMeal()
     })
-    function isFavoriteMeal() { 
-        console.log('function RenderMeal effect ')
-      
+    function isFavoriteMeal() {  
         let isFav = context.favorites.find( item => ( 
             item.idMeal === props.meal.idMeal 
         ))
  
-        if(!!isFav) { setIsFavorite(true)  }else { 
+        if(!!isFav) { 
+            setIsFavorite(true)  
+        } else { 
             setIsFavorite(false)
-        } 
-        // context.favorites.includes
+        }  
     }
 
     return ( 

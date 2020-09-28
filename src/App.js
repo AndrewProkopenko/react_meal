@@ -43,6 +43,9 @@ function App(props) {
         GET_AREA_LIST().then( response => {  
           context.setListAreas(response.meals) 
         } )
+
+        context.setFavoritesFromStorage()
+
     }
     async function updateRandom () { 
       await RANDON_MEAL().then( response => {  
