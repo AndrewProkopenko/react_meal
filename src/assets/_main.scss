@@ -74,6 +74,9 @@ a:focus {
     }
 }
 .btn-favorite { 
+    position: relative;
+    z-index: 5;
+    height: 40px;
     max-height: 40px; 
     min-width: 40px;
     display: flex;
@@ -90,6 +93,7 @@ a:focus {
     }
     &:hover { 
         background: none;
+        // border-color: rgb(237, 180, 178);;
         svg {  
             fill: rgb(209, 71, 66);
         }
@@ -108,6 +112,22 @@ a:focus {
         background:  rgb(221, 102, 98);
         svg {  
             fill: rgb(255, 255, 255);
+        }
+    }
+}
+
+.btn-update { 
+    &:hover { 
+        background: none;
+        border-color: $primary;
+        svg {  
+            fill: $primary;
+        }
+    }
+    &:active { 
+        background: $primary;
+        svg {  
+            fill: #fff;
         }
     }
 }

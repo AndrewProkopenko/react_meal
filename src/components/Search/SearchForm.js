@@ -1,14 +1,17 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState , useEffect, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
+
+import AppContext from '../../context/AppContext'
 
 import { SEARCH_MEALS } from '../../actions/actions' 
  
 
-function SearchForm(props) {
-    // console.log(str)
+function SearchForm(props) { 
     let [searchValue, setSearchValue] = useState('')
     let [isRedirect, setIsRedirect] = useState(false)
     let [isDisabled, setIsDisabled] = useState(true)
+
+    const context = useContext(AppContext);
 
     // let value
     let value 
@@ -20,7 +23,7 @@ function SearchForm(props) {
 
     function onFormSumbit(e) { 
         e.preventDefault() 
-        props.context.setSearchString(searchValue)
+        context.setSearchString(searchValue)
         searchQuery()
         setIsRedirect(true)  
     }
@@ -29,12 +32,12 @@ function SearchForm(props) {
         SEARCH_MEALS(searchValue)
             .then( response => {   
                 if(response.meals == null) {   
-                    props.context.setSearchResponse([])
-                    props.context.setIsEmptySearchAnswer(true)
+                    context.setSearchResponse([])
+                    context.setIsEmptySearchAnswer(true)
                 }
                 else {  
-                    props.context.setSearchResponse(response.meals) 
-                    props.context.setIsEmptySearchAnswer(false) 
+                    context.setSearchResponse(response.meals) 
+                    context.setIsEmptySearchAnswer(false) 
                 } 
                 setIsRedirect(false)  
             })  

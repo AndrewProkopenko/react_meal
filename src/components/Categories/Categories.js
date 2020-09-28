@@ -1,20 +1,25 @@
-import React  from 'react' 
+import React, { useEffect, useContext }  from 'react' 
+import AppContext from '../../context/AppContext'
+
 import { GET_CATEGORIES } from '../../actions/actions'
 
 import RenderAsList from '../../views/renderAsList'
  
 
+ 
 function Categories(props) {
 
     const [categories, setCategories] = React.useState([])
+    
+    const context = useContext(AppContext);
 
-    React.useEffect( () => {
+    useEffect( () => {
         cachingCategoryData() 
     }, [])
 
     function cachingCategoryData() { 
-        if(props.context.categories.length > 0) { 
-            setCategories(props.context.categories)
+        if(context.categories.length > 0) { 
+            setCategories(context.categories)
             console.log('cash')
         } 
         else {  
@@ -27,7 +32,7 @@ function Categories(props) {
         GET_CATEGORIES()
         .then( response => { 
             setCategories(response.categories) 
-            props.context.setCategories(response.categories) 
+            context.setCategories(response.categories) 
         }) 
          
     }

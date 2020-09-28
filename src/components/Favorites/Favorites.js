@@ -1,35 +1,28 @@
-import React  from 'react'  
-import SingleMealView from '../../views/SingleMealView' 
- 
-import { Link } from 'react-router-dom'
+import React, { useContext }  from 'react'  
+import AppContext from '../../context/AppContext' 
 
+import RenderMeal from '../Meal/RenderMeal'
+ 
 function Favorites(props) {
      
-  
-
-    function renderFavorites() { 
-        
-        
-        return(    
-            props.context.favorites.length>0 &&
-            props.context.favorites.map( (meal) => (
-                <div className='col-12 list-meals' key={meal.idMeal}> 
-                    <Link to={`/meal/${meal.idMeal}`}>
-                        <SingleMealView 
-                            thumb={meal.strMealThumb}
-                            title={meal.strMeal}
-                            // category={meal.strCategory}
-                            // area={meal.strArea} 
-                            meal={meal} 
-                            id={meal.idMeal} 
-                            hendlerFavorites={props.context.hendlerFavorites}
-                            favorites={props.context.favorites}
-                            is-small-view={true} 
-                                 
-                        />
-                    </Link> 
+    const context = useContext(AppContext);
+ 
+    function renderFavorites() {   
+        if (context.favorites.length > 0) 
+        return (  
+            context.favorites.map( (meal) => (
+                <div className='col-12 list-meals' key={meal.idMeal}>  
+                        <RenderMeal  
+                            meal={meal}  
+                            isFavoriteView={true}
+                        />  
                 </div>
             ))    
+        )
+        return (
+            <h5 className='text-center mt-3' >
+                You don't have any favorites
+            </h5>
         )
     } 
     return ( 

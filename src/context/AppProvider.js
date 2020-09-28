@@ -20,108 +20,122 @@ class AppProvider extends Component {
     render() { 
         return (
             <AppContext.Provider value={ { 
-                categories: this.state.categories,   
+                    categories: this.state.categories,   
 
-                searchResponse: this.state.searchResponse, 
-                searchString: this.state.searchString, 
-                isEmptySearchAnswer: this.state.isEmptySearchAnswer, 
+                    searchResponse: this.state.searchResponse, 
+                    searchString: this.state.searchString, 
+                    isEmptySearchAnswer: this.state.isEmptySearchAnswer, 
 
-                randomMeal: this.state.randomMeal, 
-                listCategories: this.state.listCategories, 
-                listAreas: this.state.listAreas, 
+                    randomMeal: this.state.randomMeal, 
+                    listCategories: this.state.listCategories, 
+                    listAreas: this.state.listAreas, 
 
-                favorites: this.state.favorites, 
+                    favorites: this.state.favorites, 
 
-                setCategories: (categories) => {   
-                    this.setState({ 
-                        categories: categories
-                    })  
-                },
-                setSearchResponse: (response) => { 
-                    this.setState({ 
-                        searchResponse: response, 
-                    })  
-                },
-                setSearchString: (string) => { 
-                    this.setState({  
-                        searchString: string
-                    })  
-                },
-                setIsEmptySearchAnswer: (bool) => {
-                    this.setState({ 
-                        isEmptySearchAnswer: bool
-                    })
-                },
-
-                setRandomMeal: (meal) => { 
-                    this.setState({  
-                        randomMeal: meal
-                    })  
-                },
-                setListCategories: (list) => { 
-                    this.setState({  
-                        listCategories: list
-                    })  
-                },
-                setListAreas: (list) => { 
-                    this.setState({  
-                        listAreas: list
-                    })  
-                },
-
-                setFavorites: (newList) => { 
-                    this.setState({  
-                        favorites: newList
-                    })  
-                },
-
-                hendlerFavorites: (meal, isFavorite) => { 
-                    // console.log(meal)
-                    // const id = meal
-                    let newFavoritesArray =  this.state.favorites.slice() 
-                    
-                    if (isFavorite) {  
-                        const filtered = newFavoritesArray.filter( item => {
-                            return  item.id == meal.idMeal
-                        }) 
-                        this.setState({
-                            favorites: filtered
+                    setCategories: (categories) => {   
+                        this.setState({ 
+                            categories: categories
+                        })  
+                    },
+                    setSearchResponse: (response) => { 
+                        this.setState({ 
+                            searchResponse: response, 
+                        })  
+                    },
+                    setSearchString: (string) => { 
+                        this.setState({  
+                            searchString: string
+                        })  
+                    },
+                    setIsEmptySearchAnswer: (bool) => {
+                        this.setState({ 
+                            isEmptySearchAnswer: bool
                         })
-                    }
-                    else {  
-                        newFavoritesArray.push(meal)
-                        this.setState({
-                            favorites: newFavoritesArray
-                        })
-                    }
+                    },
 
-                    // if(newFavoritesArray.length === 0 ) {
-                    //     newFavoritesArray.push(meal)
-                    //     this.setState({
-                    //         favorites: newFavoritesArray
-                    //     })
-                    // }
-                    // else newFavoritesArray.forEach((element) => {
-                         
-                    //     if(element.idMeal == meal.idMeal) { 
+                    setRandomMeal: (meal) => { 
+                        this.setState({  
+                            randomMeal: meal
+                        })  
+                    },
+                    setListCategories: (list) => { 
+                        this.setState({  
+                            listCategories: list
+                        })  
+                    },
+                    setListAreas: (list) => { 
+                        this.setState({  
+                            listAreas: list
+                        })  
+                    },
+
+                    // setFavorites: (newList) => { 
+                    //     this.setState({  
+                    //         favorites: newList
+                    //     })  
+                    // },
+
+                    // hendlerFavorites: (meal, isFavorite) => { 
+                    //     // console.log(isFavorite)
+                    //     // const id = meal
+                    //     let newFavoritesArray =  this.state.favorites.slice() 
+                        
+                    //     if (isFavorite) {  
                     //         const filtered = newFavoritesArray.filter( item => {
                     //             return  item.id == meal.idMeal
                     //         }) 
                     //         this.setState({
                     //             favorites: filtered
                     //         })
-                    //     } else { 
+                    //         console.log(filtered)
+                    //     }
+                    //     else {  
                     //         newFavoritesArray.push(meal)
                     //         this.setState({
                     //             favorites: newFavoritesArray
                     //         })
                     //     }
-                    // });
+    
+                    // },
+                    
+                    hendlerFavorites: (meal, id) => { 
+                        let isFav = false
+                        const newFavoritesArray =  this.state.favorites.slice()
+                        
+                        if( this.state.favorites.length > 0) { 
+                            this.state.favorites.forEach( (item) => { 
+                                if(item.idMeal === id ) {
+                                    
+                                    isFav = true  
+                                } 
+                            }) 
+                            if(isFav) {
+                                console.log('udalenie')
+                                const filtered = newFavoritesArray.filter( item => {
+                                    return  item.idMeal !== id
+                                })   
+                                this.setState({
+                                    favorites: filtered
+                                })
+                            } else {
+                                newFavoritesArray.push(meal)
+                                this.setState({
+                                    favorites: newFavoritesArray
+                                }) 
+                            }
+                        }
+                        else {
+                            newFavoritesArray.push(meal)
+                            this.setState({
+                                favorites: newFavoritesArray
+                            })
+                        }
 
-                    // console.log(this.state.favorites)
-                    // console.log(isFavorite)
-                    // console.log(id)
-                }
+                        // setTimeout(() => {
+                        //     console.log(this.state.favorites)
+                        // }, 300);
+                    } 
+                    
 
             } }>
                 {this.props.children}

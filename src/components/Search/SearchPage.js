@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import AppContext from '../../context/AppContext'
+
 import SearchForm from './SearchForm'
-import RenderAsList from '../../views/renderAsList'
-import AppContext from '../../context/AppContext' 
+import RenderAsList from '../../views/renderAsList' 
 
 
 function SearchPage(props) { 
-    let title = props.context.searchString ? `Search result for "${props.context.searchString}" ` : 'Search'
+    
+    const context = useContext(AppContext);
+
+    let title = context.searchString ? `Search result for "${context.searchString}" ` : 'Search'
  
     function renderSearchAnswer() { 
         return( 
             <div> 
-                {   props.context.searchResponse.length>0 &&
-                    props.context.searchResponse.map( (meal) => (
+                {   context.searchResponse.length>0 &&
+                    context.searchResponse.map( (meal) => (
                         <div className='col' key={meal.idMeal}>
                             <RenderAsList  
                                     id={meal.idMeal}
@@ -24,7 +29,7 @@ function SearchPage(props) {
                     )) 
                 }
                 {
-                 props.context.isEmptySearchAnswer &&
+                 context.isEmptySearchAnswer &&
                  <h4 className='text-center mt-4'>Ooops, Nothing Found</h4> 
                 }
                 
@@ -37,16 +42,9 @@ function SearchPage(props) {
        
         <div className='container container-styled search-container'> 
             <h3> { title } </h3> 
-
-            <AppContext.Consumer>
-                {
-                    context => (
-                        <SearchForm  context={ context } isContained={true} />
-                    )
-                }
-                
-            </AppContext.Consumer> 
-
+            
+            <SearchForm isContained={true} />
+                 
             <div className='row mt-4'>
                 { 
                     renderSearchAnswer()

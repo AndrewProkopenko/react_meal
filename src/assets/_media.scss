@@ -41,6 +41,37 @@
             margin-bottom: 15px;
         }
     }
+    .list-meals { 
+        .single-meal  {
+            .col-12 { 
+                >div { 
+                    margin-top: 12px !important; 
+                }
+            }
+            .img { 
+                width: 100px;
+                height: 100px;
+            }
+            a { 
+                flex-grow: 1;
+                h4 { 
+                    text-align: center;
+                    padding: 0 50px;
+                    margin-bottom: 0;
+                    font-size: 22px;
+                    line-height: 24px;
+                }
+            }
+            .btn-favorite { 
+                position: absolute;
+                top: -6px;
+                right: 0;
+            }
+            div { 
+                position: relative;
+            }
+        }
+    }
 }
  
 @media screen and (max-width: 767px) {}

@@ -5,10 +5,10 @@ import { FILTER_BY_CATEGORY } from '../../actions/actions'
 function SingleCategory(props) {
     const [data, setData] = useState([]);
  
-    useEffect(() => {
-        if(data.length === 0 ) fetchCategory() 
-    });
-
+    useEffect(() => { 
+        fetchCategory() 
+    }, []);
+ 
     
     function fetchCategory() {  
         FILTER_BY_CATEGORY(props.match.params.category)
@@ -49,5 +49,4 @@ function SingleCategory(props) {
      
 }
 
-export default SingleCategory
- 
+export default SingleCategory 

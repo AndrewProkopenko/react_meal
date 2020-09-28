@@ -1,10 +1,9 @@
 import React , { useEffect, useState } from 'react'
-import { GET_SINGLE_MEAL } from '../../actions/actions'
-import AppContext from '../../context/AppContext'
+import { GET_SINGLE_MEAL } from '../../actions/actions' 
 
-import SingleMealView from '../../views/SingleMealView' 
+import RenderMeal from './RenderMeal'
 
-
+// SingleMeal - компонент для отображения страницы рецепта
 function SingleMeal(props) {
     
     const [meal, setMeal] = useState([]);  
@@ -22,30 +21,12 @@ function SingleMeal(props) {
 
  
 
-    return (
-        <AppContext.Consumer>
-        {
-            context => ( 
-
-                <div className='container container-styled '>  
-                    <SingleMealView 
-                        thumb={meal.strMealThumb}
-                        title={meal.strMeal}
-                        category={meal.strCategory}
-                        area={meal.strArea}
-                        description={meal.strInstructions}
-                        meal={meal} 
-                        id={meal.idMeal}
-                        hendlerFavorites={context.hendlerFavorites}
-                        favorites={context.favorites} 
-                    />
-                </div> 
-            )
-        }
-        
-    </AppContext.Consumer> 
-    
-      
+    return ( 
+        <div className='container container-styled '>  
+            <RenderMeal  
+                meal={meal}  
+            />
+        </div>    
     )
 }
 

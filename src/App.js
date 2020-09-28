@@ -1,4 +1,6 @@
-import React, { useEffect }  from 'react';  
+import React, { useEffect, useContext }  from 'react';  
+import AppContext from './context/AppContext'
+
 import Home from './components/Home'
 
 import Categories from './components/Categories/Categories'
@@ -26,34 +28,36 @@ function App(props) {
     useEffect( () => { 
         fetchData()
     }, [])
+    
+    const context = useContext(AppContext);
      
 
     function fetchData() { 
        console.log('fetchData') 
         RANDON_MEAL().then( response => {  
-          props.context.setRandomMeal(response.meals[0]) 
+          context.setRandomMeal(response.meals[0]) 
         } ) 
         GET_CATEGORIES_LIST().then( response => {  
-          props.context.setListCategories(response.meals) 
+          context.setListCategories(response.meals) 
         } ) 
         GET_AREA_LIST().then( response => {  
-          props.context.setListAreas(response.meals) 
+          context.setListAreas(response.meals) 
         } )
     }
     async function updateRandom () { 
       await RANDON_MEAL().then( response => {  
-        props.context.setRandomMeal(response.meals[0]) 
+        context.setRandomMeal(response.meals[0]) 
       } ) 
     }
     return (
       <Router> 
           <Header/> 
           <Switch>   
-              <Route exact path="/categories">
-                <Categories context={props.context} />
-              </Route>
+           
+              <Route exact path="/categories" component={Categories} />  
 
               <Route exact path="/category/:category" component={SingleCategory} />  
+              {/* <Route exact path="/category/:category" component={(routerProps) => <SingleCategory context={props.context} {... routerProps} />} /> */}
 
               <Route exact  path="/areas" component={Areas} />  
 
@@ -63,20 +67,14 @@ function App(props) {
               
               <Route exact path="/search" component={SearchPage} />  
               
-              <Route exact path="/search/:search" >
-                  <SearchPage context={props.context} />
-              </Route>  
+              <Route exact path="/search/:search" component={SearchPage} />
+               
               <Route exact path="/favorites" >
                   <Favorites context={props.context} />
               </Route>  
               
               <Route path="/">
-                <Home 
-                updateRandom={updateRandom}
-                  // meal={props.context.randomMeal}
-                  // listCategories={props.context.listCategories}
-                  // listAreas={props.context.listAreas}
-                />
+                  <Home  updateRandom={updateRandom} />
               </Route> 
           </Switch>
       </Router> 
