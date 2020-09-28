@@ -71,7 +71,7 @@ class AppProvider extends Component {
                     
                     hendlerFavorites: (meal, id) => { 
                         let isFav = false 
-                        
+
                         let newFavoritesArray =  this.state.favorites.slice()
                         
                         if( this.state.favorites.length > 0) { 
@@ -112,10 +112,14 @@ class AppProvider extends Component {
 
                     setFavoritesFromStorage: () => {
                         let favorites = localStorage.getItem('react_meal_favorites')
-                        favorites = JSON.parse(favorites)
-                        this.setState({
-                            favorites: favorites
-                        })
+                        favorites = JSON.parse(favorites) 
+
+                        if(favorites) {
+                            this.setState({
+                                favorites: favorites
+                            })
+                        }
+                       
                     }
                     
 
