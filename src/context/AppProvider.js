@@ -70,7 +70,8 @@ class AppProvider extends Component {
                     }, 
                     
                     hendlerFavorites: (meal, id) => { 
-                        let isFav = false
+                        let isFav = false 
+                        
                         let newFavoritesArray =  this.state.favorites.slice()
                         
                         if( this.state.favorites.length > 0) { 

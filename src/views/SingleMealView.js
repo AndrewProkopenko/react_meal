@@ -114,9 +114,10 @@ function SingleMealView(props) {
             </NavLink> 
         )
         return (
+            
             <h4>
                 <div className='img' style={{backgroundImage: `url(${props.thumb})`}}></div> 
-            </h4>  
+            </h4>   
         )
     }
 

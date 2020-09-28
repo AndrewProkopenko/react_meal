@@ -19,12 +19,10 @@ function Categories(props) {
 
     function cachingCategoryData() { 
         if(context.categories.length > 0) { 
-            setCategories(context.categories)
-            console.log('cash')
+            setCategories(context.categories) 
         } 
         else {  
-             fetchCategories()
-             console.log('fetch')
+             fetchCategories() 
         }
     }
 
@@ -44,12 +42,12 @@ function Categories(props) {
                     categories.map( (category) => (
                         <div className='col' key={category.idCategory}>
                             <RenderAsList  
-                                    id={category.idCategory}
-                                    name={category.strCategory} 
-                                    desc={category.strCategoryDescription}
-                                    thumb={category.strCategoryThumb}  
-                                    link={`/category/${category.strCategory}`}
-                                    className={'container-category'} 
+                                id={category.idCategory}
+                                name={category.strCategory} 
+                                desc={category.strCategoryDescription}
+                                thumb={category.strCategoryThumb}  
+                                link={`/category/${category.strCategory}`}
+                                className={'container-category'} 
                             /> 
                         </div>
                     )) 
